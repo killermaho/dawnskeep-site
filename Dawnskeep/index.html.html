@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dawnskeep | Independent App Development</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --bg2: #eef4ff;
+      --card: rgba(255,255,255,0.92);
+      --text: #18212f;
+      --muted: #5f6b7a;
+      --accent: #5b8cff;
+      --accent2: #ff77ba;
+      --line: #e6ebf2;
+      --shadow: 0 16px 40px rgba(22, 34, 58, 0.08);
+      --radius: 24px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg), var(--bg2));
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--shadow);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      margin-left: 18px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+      margin: 18px 0 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h1, h2, h3 { margin-top: 0; line-height: 1.12; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    p { color: var(--muted); margin-top: 0; }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(91, 140, 255, 0.1);
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stat {
+      padding: 20px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(91,140,255,0.08), rgba(255,119,186,0.08));
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .section {
+      margin: 0 0 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .feature-box {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .apps-callout {
+      background: linear-gradient(135deg, rgba(91,140,255,0.1), rgba(255,119,186,0.12));
+    }
+
+    ul.clean {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul.clean li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 12px 0 42px;
+      font-size: 0.95rem;
+    }
+
+    .small { font-size: 0.95rem; }
+
+    @media (max-width: 900px) {
+      .hero, .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        margin-left: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>Dawnskeep</div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#apps">Apps</a>
+        <a href="#support">Support</a>
+        <a href="#legal">Legal</a>
+      </nav>
+    </header>
+
+    <section class="hero section">
+      <div class="card">
+        <div class="eyebrow">Independent App Development</div>
+        <h1>Simple software, built to make everyday life easier.</h1>
+        <p>
+          Dawnskeep is an independent app development company founded by Mike, focused on creating intuitive, user-friendly applications that help people stay organized and in control of their daily lives.
+        </p>
+        <p>
+          We build tools that are clean, practical, and affordable—designed to deliver real value without unnecessary complexity.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#apps">View Our Apps</a>
+          <a class="btn btn-secondary" href="#support">Contact Dawnskeep</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="card stat">
+          <strong>Clean</strong>
+          <span>User-friendly design focused on clarity and ease of use.</span>
+        </div>
+        <div class="card stat">
+          <strong>Reliable</strong>
+          <span>Apps built to perform consistently and support daily routines.</span>
+        </div>
+        <div class="card stat">
+          <strong>Affordable</strong>
+          <span>More features at a better price than many competing apps.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="card section">
+      <h2>About Dawnskeep</h2>
+      <div class="grid-2">
+        <div>
+          <p>
+            Dawnskeep creates thoughtfully designed apps for people who want better tools without a steep learning curve. Our mission is to make organization feel effortless rather than overwhelming.
+          </p>
+          <p>
+            Every app we build is carefully crafted to provide a clean experience, reliable performance, and features that genuinely improve productivity.
+          </p>
+        </div>
+        <div>
+          <p>
+            We believe great software should be accessible to everyone. That is why Dawnskeep is committed to offering more value at a more affordable price, without compromising on quality.
+          </p>
+          <p>
+            Founded by Mike, Dawnskeep is built around independence, practicality, and a strong focus on creating software people actually enjoy using.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="card section">
+      <h2>What We Focus On</h2>
+      <div class="grid-3">
+        <div class="feature-box">
+          <h3>Productivity Apps</h3>
+          <p>Tools that help users stay on track, manage routines, and keep daily life organized.</p>
+        </div>
+        <div class="feature-box">
+          <h3>User-Friendly Design</h3>
+          <p>Interfaces designed to feel intuitive right away, with minimal friction and clear navigation.</p>
+        </div>
+        <div class="feature-box">
+          <h3>Affordable Value</h3>
+          <p>Feature-rich apps priced to stay accessible for everyday users.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="apps" class="card section apps-callout">
+      <h2>Our Apps</h2>
+      <p>
+        Dawnskeep apps each have their own dedicated pages with full details, screenshots, and pricing.
+      </p>
+
+      <div class="grid-2">
+        <div class="feature-box">
+          <h3>Timekeeper / Stopwatch Pro</h3>
+          <p>Break timers, job tracking, logs, and customizable themes designed for daily work routines.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="timekeeper.html">View Timekeeper</a>
+          </div>
+        </div>
+
+        <div class="feature-box">
+          <h3>Recipe App (Coming Soon)</h3>
+          <p>A simple and clean recipe app designed for browsing, saving, and organizing meals with an easy-to-use interface.</p>
+          <div class="cta-row">
+            <a class="btn btn-secondary" href="recipe.html">View Recipe App</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:16px;">
+        (Create a <strong>recipe.html</strong> page later just like the Timekeeper page.)
+      </p>
+    </section>
+
+    <section id="support" class="card section">
+      <h2>Support</h2>
+      <p>Dawnskeep provides support for app questions, billing issues, and general product help.</p>
+      <ul class="clean">
+        <li><strong>Email:</strong> support@yourappdomain.com</li>
+        <li><strong>Support Page:</strong> yourappdomain.com/support</li>
+        <li><strong>Response Time:</strong> Usually within 1–2 business days</li>
+      </ul>
+    </section>
+
+    <section id="legal" class="card section">
+      <h2>Legal</h2>
+      <p><strong>Privacy Policy</strong></p>
+      <p class="small">Replace this with your company privacy policy and link to a full page.</p>
+      <p><strong>Terms of Service</strong></p>
+      <p class="small">Replace this with your company terms of service and link to a full page.</p>
+    </section>
+
+    <div class="footer">
+      © 2026 Dawnskeep • Independent app development by Mike
+    </div>
+  </div>
+</body>
+</html>
